@@ -1,6 +1,6 @@
 # Smart Student Budget & Recipe Planner
 
-**Team members** [Full name 1], [Full name 2], [Full name 3]
+**Team members** [213617913 : Omar Kadan], [216093633 : Obida Jbara], [216136572 : Basil Jamal]
 
 ## 1. Problem and need
 
