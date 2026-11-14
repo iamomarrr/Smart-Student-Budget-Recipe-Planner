@@ -2,9 +2,9 @@
 
 **Team members**
 
-Omar Kadan :  213617913
-Obida Jbara : 216093633
-Basil Jamal : 216136572
+* Omar Kadan : 213617913
+* Obida Jbara : 216093633
+* Basil Jamal : 216136572
 
 ## 1. Problem and need
 
