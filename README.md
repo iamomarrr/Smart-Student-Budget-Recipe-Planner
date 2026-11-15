@@ -2,7 +2,7 @@
 
 A Flask course demo. Enter a grocery budget and three ingredients you already have. The planner returns three one-serving dinners and a priced shopping list. [Read the project proposal](docs/01-proposal.md).
 
-## Run locally
+## Install Python 3.10 or newer. Clone or download this repository and open a terminal at the repository root.
 
 Install Python 3.10 or newer. Extract the ZIP and open a terminal in the folder with `app.py`.
 
