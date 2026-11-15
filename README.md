@@ -9,6 +9,7 @@ Install Python 3.10 or newer. Extract the ZIP and open a terminal in the folder 
 **Windows PowerShell**
 
 ```powershell
+cd smart-student-planner
 python -m venv .venv
 .\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\.venv\Scripts\python.exe app.py
@@ -17,6 +18,7 @@ python -m venv .venv
 **macOS or Linux**
 
 ```bash
+cd smart-student-planner
 python3 -m venv .venv
 ./.venv/bin/python -m pip install -r requirements.txt
 ./.venv/bin/python app.py
