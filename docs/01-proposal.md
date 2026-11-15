@@ -11,9 +11,9 @@ Our target users are college students who cook for themselves and shop with a fi
 
 ## 2. Proposed solution
 
-We propose a web app that takes a grocery spending limit and the ingredients and amounts a student already has. It returns three one-serving dinners, the ingredients to buy for all three, the estimated total, and the budget left. Python combines ingredient needs across the meals, deducts the confirmed pantry amounts, and prices the missing quantities in sellable packages from a dated store catalog. It chooses the lowest-cost combination among the recipes it checks and tells the student when it finds no combination within the cap.
+We propose a web app that takes a grocery budget and the ingredients and amounts a student already has. It returns three one-serving dinners, a combined shopping list, the estimated total, and the budget left. The planner combines ingredient needs across the meals, deducts the pantry amounts, and prices what is missing in whole packages. It picks the cheapest combination in the starter catalog that fits the budget and reports when none fits. The current prototype uses sample package sizes and prices.
 
-For example, if the dinners use 500 g of rice and the student has 200 g, the grocery list needs to cover 300 g. If a 1 kg bag is the available package at NIS 8, the estimated grocery spend for rice is NIS 8. A planned photo or screenshot upload will help students enter their pantry items faster.
+For example, if the dinners use 500 g of rice and the student has 200 g, the grocery list needs to cover 300 g. If rice comes in 1 kg bags at NIS 8, the estimate includes one bag at NIS 8. The prototype also accepts a photo or screenshot and suggests pantry ingredients. The student reviews the suggestions and enters the quantities.
 
 ## 3. Users and stakeholders
 
@@ -47,32 +47,36 @@ Our goal is to help students plan dinners they would actually cook and check the
 
 ## 6. First version and its boundaries
 
-- **MVP.** We chose three dinners because that is enough to test whether meals can share grocery packages while keeping the first version manageable. The form will start with three pantry rows and let students add more. If a student enters five relevant ingredients from the catalog, the planner will account for all five when calculating what to buy.
-- **Suitable meal combination.** A plan must include three different one-serving recipes from the checked starter catalog. Every required quantity must be covered by the pantry or the shopping list, and the total cost of the packs must fit the budget. The planner then picks the cheapest combination that meets those rules.
+- **MVP.** Three dinners let us test how meals can share whole grocery packages within a small recipe catalog. The form starts with three pantry rows and lets students add more. If a student enters five ingredients from the catalog, the planner accounts for all five.
+- **Suitable meal combination.** A plan includes three different one-serving recipes from the checked starter catalog. The confirmed pantry and shopping list must cover every required amount, and the total pack cost must fit the budget. The planner picks the cheapest combination that meets those rules.
+- **Assumption and test.** Students can find three dinners they would cook and a complete shopping list within budget faster than with their usual method. We will test this with the timed comparison and hand-checked scenarios in [Section 5](#5-goal-objectives-and-metrics).
+- **Later versions.** Weekly meal plans, dietary filters, and AI-generated recipes.
+- **Outside the product's scope.** Grocery checkout, delivery, and medical nutrition advice.
 
 ## 7. Feasibility, constraints, and risks
 
-Three people can build the first version around a Python planner, a small Flask web interface, and a catalog of common ingredients with one known package size and price per ingredient. We can use store prices collected on a specific date and review the starter recipes by hand. The main constraints are one semester, team time for gathering prices and testing recipes, and the cost and availability of any AI service we choose.
+The current prototype uses a Python planner, a small Flask web interface, and one sample pack size and price per ingredient. The small catalog makes it feasible for a three-person team to check recipes and costs by hand within the semester. The pilot still needs a dated store price snapshot, time to test recipes with students, and AI usage within the available quota.
 
 | Risk | How we will handle it |
 | --- | --- |
 | A store price changes | Display the store and date with the estimate and use the same price snapshot for repeatable tests. |
 | Few recipes fit a tight budget | Try representative student budgets early and use the pilot results to decide where the recipe catalog needs more variety. |
-| Photo recognition gives wrong results or the AI service is unavailable | Put suggestions on a review screen and keep manual entry available. |
+| Photo recognition gives wrong results or the AI service is unavailable | Let students review suggested pantry rows and keep manual entry available. |
 | Students prefer their current workflow | Give them the same planning task and record where they spend time or correct the output. |
 
 ## 8. Business model and AI use
 
 We propose a free course pilot. It creates value by saving planning time and helping students decide what they can buy. We will measure the effort of maintaining the catalog and the cost of hosting and AI calls before considering wider use.
 
-- **AI role.** A vision-capable model can suggest pantry items from a photo or screenshot. Later, an AI agent could propose meals with catalog ingredient IDs and amounts that the Python planner can check against the budget.
-- **Verification.** Students confirm each detected item and its quantity. We will compare the detector against sample images with a known list of ingredients. Recipe suggestions must use supported ingredients and usable quantities before they reach the planner.
-- **Cost.** After choosing a provider, we will estimate the cost per photo or recipe request and track the number of requests in the pilot. The first version can run with checked recipes and manual entry.
-- **Data and privacy.** The app will process an upload for detection and discard its copy after the request. The planner needs the confirmed ingredients and their amounts. We will check the provider’s retention policy and use staged ingredient photos or screenshots for testing.
+- **AI role.** The prototype uses Gemini (`gemini-3.5-flash-lite`) to suggest ingredients from the catalog. The planner computes costs using the pantry quantities the student enters.
+- **Verification.** We will compare suggestions against staged images with known contents and record the time students spend correcting suggestions and entering amounts.
+- **Cost.** We will estimate cost per photo request and track request counts during the pilot. Manual entry is available for the full planning flow.
+- **Data and privacy.** The app sends Gemini a resized copy with image metadata removed. We will check the provider’s retention policy before the pilot and test with staged ingredient photos or screenshots containing invented data.
 
 ## 9. Open questions
 
 - Which store and product sizes best represent the way our target students shop?
 - What spending caps and recipes do the first students consider realistic for three dinners?
 - How accurately can the photo feature recognize catalog ingredients in a cluttered fridge or a screenshot, and does it save time after corrections?
-- Which AI provider fits the pilot’s cost and response-time limits, and how does it handle uploaded images?
+- What cost and response time should we expect from Gemini during the pilot, and what is its image retention policy?
+- Does the course require a specific language for the final MVP?
