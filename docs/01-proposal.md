@@ -5,7 +5,7 @@
 * Omar Kadan   : 213617913
 * Obida Jbara  : 216093633
 * Basil Haj Yahia : 216136572
-
+———-
 ## 1. Problem and need
 
 Our target users are college students who cook for themselves and shop with a fixed grocery budget. Before a grocery trip, they have to decide what to cook, check what they already have, and work out what the missing ingredients will cost. A recipe can look cheap per serving while still requiring the student to pay for several full packages. The need is a quick way to decide what to cook and know how much money the next grocery trip will require.
