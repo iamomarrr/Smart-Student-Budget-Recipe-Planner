@@ -54,10 +54,11 @@ def suggest_ingredients(upload: bytes, catalog: Mapping[str, Ingredient]) -> lis
     photo = prepare_photo(upload)
     api_key = os.environ.get("GEMINI_API_KEY", "").strip()
     if not api_key:
-        raise PhotoAnalysisError("Set GEMINI_API_KEY in your terminal and restart Flask to analyze photos.")
+        # normally i would put a button to directly put the token insdie the interface web , but lets keep it later
+        raise PhotoAnalysisError("Set GEMINI_API_KEY in your terminal and restart the program to analyze photos.")
 
     choices = "\n".join(f"{ingredient_id}: {item.name}" for ingredient_id, item in catalog.items())
-    prompt = (
+    prompt = ( # and here's the prompt ive been working on 2 hours to just make it so great to locate
         "Identify ingredients visibly present in this fridge or pantry photo, or explicitly "
         "listed in this grocery list screenshot. Return only matching catalog IDs. "
         "Use an empty ingredient_ids list if none of these items can be identified. "
