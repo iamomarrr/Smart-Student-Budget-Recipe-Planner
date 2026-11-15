@@ -4,7 +4,7 @@
 
 * Omar Kadan   : 213617913
 * Obida Jbara  : 216093633
-* Basil Jamal  : 216136572
+* Basil Haj Yahia : 216136572
 
 ## 1. Problem and need
 
