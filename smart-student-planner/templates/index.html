@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+
+{% block content %}
+<header class="page-intro">
+    <h1>Plan three dinners on a budget</h1>
+    <p>Use the ingredients you already have and see what the rest will cost.</p>
+</header>
+
+<div class="workspace">
+    <section class="panel inputs" aria-labelledby="inputs-heading">
+        <h2 id="inputs-heading">Budget and pantry</h2>
+        <form method="post" action="{{ url_for('index') }}">
+            {% if error %}
+            <p class="form-error" role="alert">{{ error }}</p>
+            {% endif %}
+
+            <label class="field-label" for="budget">Budget for three dinners</label>
+            <div class="money-field">
+                <span aria-hidden="true">NIS</span>
+                <input id="budget" name="budget" type="number" min="0" step="0.01"
+                       inputmode="decimal" value="{{ raw_budget }}" aria-label="Budget in NIS" required>
+            </div>
+
+            <fieldset class="pantry-fields">
+                <legend>What you already have</legend>
+                <p id="amount-help" class="help">Enter amounts in the units shown next to each ingredient.</p>
+                <div class="pantry-row column-headings" aria-hidden="true">
+                    <span>Ingredient</span>
+                    <span>Amount</span>
+                </div>
+                {% for ingredient_id, amount in rows %}
+                <div class="pantry-row">
+                    <select id="ingredient-{{ loop.index }}" name="ingredient_{{ loop.index }}"
+                            aria-label="Ingredient {{ loop.index }}" required>
+                        <option value="" disabled{% if ingredient_id not in ingredients %} selected{% endif %}>
+                            Select an ingredient
+                        </option>
+                        {% for key, ingredient in ingredients.items() %}
+                        <option value="{{ key }}"{% if ingredient_id == key %} selected{% endif %}>
+                            {{ ingredient.name }} ({{ "count" if ingredient.unit == "piece" else ingredient.unit }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                    <input id="amount-{{ loop.index }}" name="amount_{{ loop.index }}"
+                           type="number" min="1" step="1" inputmode="numeric"
+                           aria-label="Amount for ingredient {{ loop.index }}"
+                           aria-describedby="amount-help" value="{{ amount }}" required>
+                </div>
+                {% endfor %}
+            </fieldset>
+
+            <div class="form-actions">
+                <button type="submit">Find dinner plan</button>
+                {% if not is_sample %}
+                <a class="sample-link" href="{{ url_for('index') }}">Load sample</a>
+                {% endif %}
+            </div>
+        </form>
+    </section>
+
+    {% if not error %}
+    <div class="results" id="results">
+        {% include "plan.html" %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

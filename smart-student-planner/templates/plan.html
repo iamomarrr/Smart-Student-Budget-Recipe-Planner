@@ -1,0 +1,98 @@
+{% if plan %}
+{% set purchases = plan.shopping_list.lines | selectattr("packages") | list %}
+{% set pantry_used = plan.shopping_list.lines | selectattr("from_pantry") | list %}
+<section class="summary" aria-labelledby="total-heading">
+    <div>
+        <h2 id="total-heading">{{ "Sample shopping total" if is_sample else "Shopping total" }}</h2>
+        <p id="shopping-total" class="total">{{ plan.shopping_list.total_agorot | money }}</p>
+    </div>
+    <dl class="budget-breakdown">
+        <div>
+            <dt>Budget</dt>
+            <dd>{{ plan.budget_agorot | money }}</dd>
+        </div>
+        <div>
+            <dt>Budget left</dt>
+            <dd id="budget-left">{{ plan.remaining_agorot | money }}</dd>
+        </div>
+    </dl>
+</section>
+
+<section class="panel result-panel" aria-labelledby="dinners-heading">
+    <h2 id="dinners-heading">Three dinners</h2>
+    <div class="dinners">
+        {% for dinner in plan.dinners %}
+        <details class="dinner">
+            <summary>
+                <span class="day">Day {{ loop.index }}</span>
+                <span class="dinner-name">{{ dinner.name }}</span>
+                <span class="expand" aria-hidden="true"></span>
+            </summary>
+            <div class="recipe-details">
+                <h3>Ingredients for one serving</h3>
+                <ul>
+                    {% for ingredient_id, amount in dinner.ingredients.items() %}
+                    {% set ingredient = ingredients[ingredient_id] %}
+                    <li>{{ ingredient.name }} · {{ amount | quantity(ingredient.unit) }}</li>
+                    {% endfor %}
+                </ul>
+                <h3>Cooking steps</h3>
+                <ol>
+                    {% for step in dinner.steps %}
+                    <li>{{ step }}</li>
+                    {% endfor %}
+                </ol>
+            </div>
+        </details>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="panel result-panel" aria-labelledby="shopping-heading">
+    <h2 id="shopping-heading">Shopping list</h2>
+    {% if purchases %}
+    <table class="shopping-table">
+        <thead>
+            <tr>
+                <th scope="col">Ingredient</th>
+                <th scope="col">Buy</th>
+                <th scope="col">Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for line in purchases %}
+            <tr>
+                <th scope="row">
+                    {{ line.ingredient.name }}
+                    <small>{{ line.missing | quantity(line.ingredient.unit) }} still needed</small>
+                </th>
+                <td>
+                    {{ line.packages }} {{ "pack" if line.packages == 1 else "packs" }}
+                    <small>{{ line.ingredient.pack_size | quantity(line.ingredient.unit) }} each</small>
+                </td>
+                <td>{{ line.cost_agorot | money }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="help">Your pantry covers all three dinners.</p>
+    {% endif %}
+
+    {% if pantry_used %}
+    <div class="pantry-credit">
+        <h3>Used from your pantry</h3>
+        <ul>
+            {% for line in pantry_used %}
+            <li>{{ line.ingredient.name }} · {{ line.from_pantry | quantity(line.ingredient.unit) }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</section>
+{% else %}
+<section class="panel no-plan" aria-labelledby="no-plan-heading">
+    <h2 id="no-plan-heading">No plan fits {{ budget | money }}</h2>
+    <p>The sample recipes and prices couldn't produce three dinners within this budget. Try a higher budget or update your pantry amounts.</p>
+</section>
+{% endif %}

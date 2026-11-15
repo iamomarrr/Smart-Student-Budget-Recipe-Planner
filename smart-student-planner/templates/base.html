@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Smart Student Budget &amp; Recipe Planner</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header class="site-header">
+        <div class="shell header-content">
+            <a class="brand" href="{{ url_for('index') }}">Smart Student Budget &amp; Recipe Planner</a>
+            <span class="catalog-label">Sample prices in NIS</span>
+        </div>
+    </header>
+    <main class="shell">
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
