@@ -4,7 +4,6 @@
 
 * Omar Kadan   : (id on fourm)
 * Obida Jbara  : (id on fourm)
-* Basil Haj Yahia : (id on fourm)
 
 ## 1. Problem and need
 
