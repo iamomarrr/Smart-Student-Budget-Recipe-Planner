@@ -2,9 +2,9 @@
 
 **Team members**
 
-* Omar Kadan   : 213617913
-* Obida Jbara  : 216093633
-* Basil Haj Yahia : 216136572
+* Omar Kadan   : (id on fourm)
+* Obida Jbara  : (id on fourm)
+* Basil Haj Yahia : (id on fourm)
 
 ## 1. Problem and need
 
