@@ -10,8 +10,13 @@
     <section class="panel inputs" aria-labelledby="inputs-heading">
         <h2 id="inputs-heading">Budget and pantry</h2>
         <form method="post" action="{{ url_for('index') }}">
+            <!-- Submitting with Enter runs the planner. -->
+            <input type="submit" hidden>
             {% if error %}
             <p class="form-error" role="alert">{{ error }}</p>
+            {% endif %}
+            {% if notice %}
+            <p class="form-notice" role="status">{{ notice }}</p>
             {% endif %}
 
             <label class="field-label" for="budget">Budget for three dinners</label>
@@ -23,7 +28,7 @@
 
             <fieldset class="pantry-fields">
                 <legend>What you already have</legend>
-                <p id="amount-help" class="help">Enter amounts in the units shown next to each ingredient.</p>
+                <p id="amount-help" class="help">Use the unit shown for each ingredient. Leave unused rows blank.</p>
                 <div class="pantry-row column-headings" aria-hidden="true">
                     <span>Ingredient</span>
                     <span>Amount</span>
@@ -31,8 +36,8 @@
                 {% for ingredient_id, amount in rows %}
                 <div class="pantry-row">
                     <select id="ingredient-{{ loop.index }}" name="ingredient_{{ loop.index }}"
-                            aria-label="Ingredient {{ loop.index }}" required>
-                        <option value="" disabled{% if ingredient_id not in ingredients %} selected{% endif %}>
+                            aria-label="Ingredient {{ loop.index }}">
+                        <option value=""{% if ingredient_id not in ingredients %} selected{% endif %}>
                             Select an ingredient
                         </option>
                         {% for key, ingredient in ingredients.items() %}
@@ -44,21 +49,42 @@
                     <input id="amount-{{ loop.index }}" name="amount_{{ loop.index }}"
                            type="number" min="1" step="1" inputmode="numeric"
                            aria-label="Amount for ingredient {{ loop.index }}"
-                           aria-describedby="amount-help" value="{{ amount }}" required>
+                           aria-describedby="amount-help" value="{{ amount }}">
+                    {% if loop.index > initial_pantry_rows %}
+                    <button type="submit" class="remove-ingredient" name="remove_ingredient"
+                            value="{{ loop.index }}" aria-label="Remove ingredient row {{ loop.index }}"
+                            formnovalidate>Remove</button>
+                    {% endif %}
                 </div>
                 {% endfor %}
             </fieldset>
 
             <div class="form-actions">
                 <button type="submit">Find dinner plan</button>
-                {% if not is_sample %}
-                <a class="sample-link" href="{{ url_for('index') }}">Load sample</a>
-                {% endif %}
+                <button type="submit" class="add-ingredient" name="action"
+                        value="add_ingredient" formnovalidate>Add ingredient</button>
+                <div class="form-links">
+                    {% if not is_blank %}
+                    <a href="{{ url_for('index', blank=1) }}">Start blank</a>
+                    {% endif %}
+                    {% if not is_sample %}
+                    <a href="{{ url_for('index') }}">Load sample</a>
+                    {% endif %}
+                </div>
             </div>
+
+            <fieldset class="photo-fields">
+                <legend>Photo or screenshot</legend>
+                <p class="help" id="photo-help">Choose a JPG, PNG, or WebP up to {{ max_photo_mb }} MB. A resized copy is sent to Google Gemini for ingredient suggestions.</p>
+                <input id="pantry-photo" name="photo" type="file" accept="image/jpeg,image/png,image/webp"
+                       aria-label="Pantry photo or screenshot" aria-describedby="photo-help">
+                <button type="submit" class="analyze-photo" formaction="{{ url_for('analyze_photo') }}"
+                        formenctype="multipart/form-data" formnovalidate>Analyze photo</button>
+            </fieldset>
         </form>
     </section>
 
-    {% if not error %}
+    {% if budget is defined %}
     <div class="results" id="results">
         {% include "plan.html" %}
     </div>

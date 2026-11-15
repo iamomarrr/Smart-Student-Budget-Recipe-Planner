@@ -171,14 +171,16 @@ summary:focus-visible {
     outline-offset: 3px;
 }
 
-.pantry-fields {
+.pantry-fields,
+.photo-fields {
     border: 0;
     padding: 0;
     min-width: 0;
     margin: 21px 0 0;
 }
 
-.pantry-fields legend {
+.pantry-fields legend,
+.photo-fields legend {
     padding: 0;
 }
 
@@ -222,8 +224,54 @@ button:hover {
     background: var(--green-dark);
 }
 
-.sample-link {
+.add-ingredient,
+.analyze-photo {
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--green);
+}
+
+.add-ingredient:hover,
+.analyze-photo:hover {
+    background: var(--green-light);
+}
+
+.remove-ingredient {
+    grid-column: 2;
+    justify-self: end;
+    min-height: 32px;
+    margin-top: -4px;
+    padding: 4px 6px;
+    background: transparent;
+    color: var(--green);
+    font-size: 0.84rem;
+    text-decoration: underline;
+}
+
+.remove-ingredient:hover {
+    background: var(--green-light);
+}
+
+.form-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px 16px;
     justify-self: center;
+    font-size: 0.86rem;
+}
+
+.photo-fields {
+    display: grid;
+    gap: 8px;
+    border-top: 1px solid var(--line);
+}
+
+.photo-fields legend {
+    padding-right: 8px;
+}
+
+.photo-fields input {
     font-size: 0.86rem;
 }
 
@@ -232,6 +280,15 @@ button:hover {
     margin-bottom: 14px;
     color: #852f25;
     background: #fff0ea;
+    border-radius: 8px;
+    font-size: 0.9rem;
+}
+
+.form-notice {
+    padding: 9px 11px;
+    margin-bottom: 14px;
+    color: var(--green);
+    background: var(--green-light);
     border-radius: 8px;
     font-size: 0.9rem;
 }
