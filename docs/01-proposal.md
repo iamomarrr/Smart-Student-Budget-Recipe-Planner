@@ -18,11 +18,12 @@ For example, if the dinners use 500 g of rice and the student has 200 g, the gro
 
 ## 3. Users and stakeholders
 
-| Stakeholder | What they need |
-| --- | --- |
-| Students planning their own meals | Dinners they would cook, a list they can shop from, and a total they can check against their cap. |
-| The three-person project team | A manageable recipe and price catalog, clear ownership of the interface and planner, and repeatable tests. |
-| Course instructor | A clearly bounded first version, a demonstrated user flow, and evidence that the price and AI results were checked. |
+| Context | Stakeholder | What they need |
+| --- | --- | --- |
+| Product | Students planning their own meals | Dinners they would cook and a shopping list they can check against their budget. |
+| Product | Catalog maintainer | A simple way to update recipes, pack sizes, and prices. |
+| Course project | Project team | A manageable scope and a clear way to test the demo. |
+| Course project | Course instructor | A clear first version and evidence that the team tested it. |
 
 ## 4. Current approach and alternatives
 
@@ -39,17 +40,16 @@ Our reason to switch is a hypothesis. For a student planning several meals at on
 
 Our goal is to help students plan dinners they would actually cook and check the estimated cost before shopping. These are our proposed targets for the final MVP demo.
 
-| Objective | Target and measurement |
+| Objective | Proposed target and measurement |
 | --- | --- |
-| Make a usable plan quickly | At least four of five student testers generate a plan they would cook in two minutes or less, without help, using a feasible budget and pantry example. Record completion time and ask whether they would use the plan. |
-| Verify budget calculations | Match the expected result in all 12 hand-checked scenarios. Include a basket exactly at the cap, an ingredient shared by two dinners, a purchase that needs more than one package, and a budget below the cost of any available plan. |
+| Make a usable plan quickly | At least four out of five students finish within two minutes. Start timing when the student opens a blank form with a budget and a written pantry list. Include entering the ingredients and quantities, reviewing the dinners and shopping list, and deciding whether they would cook the meals. |
+| Improve on the student's usual method | Each student tries both methods on comparable tasks using the same price catalog. Count how many produce three dinners they would cook and a complete shopping list within budget. Our proposed target is a median completion time at least 25% lower with the app among students who finish both tasks, with at least as many successful plans. |
+| Verify budget calculations | Match the expected result in all 12 hand-checked scenarios. Include five pantry ingredients, shared packages, a basket exactly at the cap, and a budget too low for any available plan. |
 
 ## 6. First version and its boundaries
 
-- **MVP.** A student enters a budget for three dinners and selects three pantry ingredients with quantities. The planner uses a small set of checked recipes and one dated price catalog. It returns three dinners with one priced shopping list or reports that it found no affordable plan.
-- **Assumption to test.** A student can go from their pantry and spending cap to a practical shopping decision in two minutes. We will test that with the student pilot and verify the basket separately by hand.
-- **Planned extensions.** The first extension is photo and screenshot input with an editable ingredient review. Further work includes AI recipe suggestions, seven-day plans, and dietary preferences such as vegetarian meals.
-- **Product boundary.** The app’s job ends with the meal plan and shopping list. Stores handle purchasing, payment, and delivery.
+- **MVP.** We chose three dinners because that is enough to test whether meals can share grocery packages while keeping the first version manageable. The form will start with three pantry rows and let students add more. If a student enters five relevant ingredients from the catalog, the planner will account for all five when calculating what to buy.
+- **Suitable meal combination.** A plan must include three different one-serving recipes from the checked starter catalog. Every required quantity must be covered by the pantry or the shopping list, and the total cost of the packs must fit the budget. The planner then picks the cheapest combination that meets those rules.
 
 ## 7. Feasibility, constraints, and risks
 
