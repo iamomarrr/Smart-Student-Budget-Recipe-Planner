@@ -23,4 +23,4 @@ Our project idea has been approved, and we have a working Python prototype. We a
 | System design | [Architecture, design decision, and team tasks](docs/04-design.md) |
 | UML diagrams | [Use case](docs/diagrams/use-case.png), [class](docs/diagrams/class.png), [sequence](docs/diagrams/sequence.png) |
 | Main-screen sketch | [Screen sketch](docs/ui-sketch.png) |
-| Shared backlog | [Task titles and priorities]([docs/03-requirements.md#backlo](https://github.com/users/obidadev/projects/3/views/1?visibleFields=%5B"Title"%2C445338137%5D). |
+| Shared backlog | [Task titles and priorities](https://github.com/users/obidadev/projects/3/views/1?visibleFields=%5B"Title"%2C445338137%5D). |
