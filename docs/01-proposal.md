@@ -55,7 +55,7 @@ Our goal is to help students plan dinners they would actually cook and check the
 
 ## 7. Feasibility, constraints, and risks
 
-The current prototype uses a Python planner, a small Flask web interface, and one sample pack size and price per ingredient. The small catalog makes it feasible for a three-person team to check recipes and costs by hand within the semester. The pilot still needs a dated store price snapshot, time to test recipes with students, and AI usage within the available quota.
+The current prototype uses a Python planner, a small Flask web interface, and one sample pack size and price per ingredient. The small catalog makes it feasible for two-person team to check recipes and costs by hand within the semester. The pilot still needs a dated store price snapshot, time to test recipes with students, and AI usage within the available quota.
 
 | Risk | How we will handle it |
 | --- | --- |
