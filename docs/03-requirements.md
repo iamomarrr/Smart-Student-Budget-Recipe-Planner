@@ -56,15 +56,4 @@ At step 4, every available three-dinner basket costs more than the entered budge
 
 ## Backlog
 
-Add the link to the team's shared backlog here and in the README before submission. Use these items to start the board.
-
-| Task title | Priority |
-| --- | --- |
-| Review the user stories and acceptance tests with a teammate | High |
-| Confirm the language required for the final MVP | High |
-| Write the system design and compare two planner approaches | High |
-| Draw the three UML diagrams and the main-screen sketch | High |
-| Link the report, diagrams, sketch, and backlog from the README | High |
-| Verify the 12 hand-checked shopping basket scenarios in the proposal | High |
-| Run the timed comparison with five students | Medium |
-| Check photo suggestions using staged ingredient images | Medium |
+[Shared backlog on GitHub](https://github.com/users/obidadev/projects/3/views/1?visibleFields=%5B"Title"%2C445338137%5D)
